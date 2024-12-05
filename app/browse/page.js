@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 
 //Browser Page
-const Page = () => {
+export default function Page() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -79,4 +79,3 @@ const Page = () => {
     )
 }
 
-export default Page();

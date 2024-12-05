@@ -25,7 +25,7 @@ export default function Page() {
 
                     <ul className="flex space-x-4">
                         <li><Link href="http://localhost:3000/" className="hover:underline">Home</Link></li>
-                        <li><Link href="/src" className="hover:underline">Browse</Link></li>
+                        <li><Link href="/browse" className="hover:underline">Browse</Link></li>
                         <li><button className="mb-4 hover:underline" onClick={signIn}>Sign In</button></li>
                     </ul>
 
@@ -35,7 +35,7 @@ export default function Page() {
             <main className="flex-grow p-6">
                 {user ? (
                     <div className="flex flex-col items-center justify-center h-screen">
-                    <p className="mb-4 p-4">Welcome, {user.displayName} ({user.email})</p>
+                    <p className="mb-4 p-4">Welcome, {user.displayName}</p>
                     <button className="mb-4 hover:underline" onClick={signOut}>Sign Out</button>
                     <p className="text-center p-8">welcome message to the site!</p>
                 </div>
