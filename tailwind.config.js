@@ -7,9 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        cursive: ['"Dancing Script"', 'cursive'],
+        colors: {
+          background: "var(--background)",
+          foreground: "var(--foreground)",
+        },
       },
     },
   },
