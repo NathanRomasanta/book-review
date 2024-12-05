@@ -15,7 +15,7 @@ export default function Page() {
     useEffect(() => {
         async function fetchBooks() {
             try {
-                const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${query}`);
+                const response = await fetch(`https://www.googleapis.com/auth/books`);
                 if (!response.ok) {
                     throw new Error('Network connection is not great!');
                 }
