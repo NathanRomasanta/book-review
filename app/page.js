@@ -57,7 +57,7 @@ export default function Page() {
               onClick={signOut}>
               Sign Out
             </button>
-            <p className='text-center p-8'>welcome message to the site!</p>
+            <p className='text-center p-8'>Welcome to Bookish Buzz!</p>
           </div>
         ) : (
           <div>
