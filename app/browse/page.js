@@ -1,20 +1,19 @@
 'use client';
-
-import { useUserAuth } from './_utils/auth-context';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useUserAuth } from '../_utils/auth-context';
+import Link from 'next/link';
 
 //Browser Page
 export default function Page() {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchBooks() {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=search+terms`
+          `https://www.googleapis.com/books/v1/volumes?q=Harry+Potter`
         );
         if (!response.ok) {
           throw new Error('Network connection is not great!');
@@ -29,9 +28,8 @@ export default function Page() {
     }
     fetchBooks();
   }, []);
-
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p>Loading...</p>;
 
   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 

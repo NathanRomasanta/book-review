@@ -1,5 +1,5 @@
 'use client';
-import { useUserAuth } from './browse/_utils/auth-context';
+import { useUserAuth } from './_utils/auth-context';
 import Link from 'next/link';
 
 //Home Page
