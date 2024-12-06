@@ -8,12 +8,14 @@ export default function Page() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
+    setLoading(true);
     async function fetchBooks() {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=Harry+Potter`
+          `https://www.googleapis.com/books/v1/volumes?q=He+Who+Fights+with+Monsters`
         );
         if (!response.ok) {
           throw new Error('Network connection is not great!');
@@ -46,6 +48,41 @@ export default function Page() {
       <header className='bg-purple-500 text-white p-8 shadow-md'>
         <div className='container mx-auto flex justify-between items-center'>
           <h1 className='text-3xl font-bold'>Bookish Buzz</h1>
+          <input
+            type='text'
+            placeholder='Search'
+            value={userInput}
+            className='border border-gray-200 p-2 rounded-lg text-black'
+            onChange={(e) => {
+              setUserInput(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              setLoading(true);
+              async function fetchBooks() {
+                try {
+                  const response = await fetch(
+                    `https://www.googleapis.com/books/v1/volumes?q=${userInput
+                      .split(' ')
+                      .join('+')}`
+                  );
+                  if (!response.ok) {
+                    throw new Error('Network connection is not great!');
+                  }
+                  const data = await response.json();
+                  setBooks(data.items);
+                } catch (error) {
+                  setError(error);
+                } finally {
+                  setLoading(false);
+                }
+              }
+              fetchBooks();
+            }}
+            className='bg-blue-500 text-white p-2 rounded-lg'>
+            Search
+          </button>
 
           <ul className='flex space-x-4'>
             <li>
