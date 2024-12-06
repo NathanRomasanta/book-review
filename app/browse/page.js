@@ -33,21 +33,12 @@ export default function Page() {
   if (error) return <p>Error: {error.message}</p>;
   if (loading) return <p>Loading...</p>;
 
-  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
-
-  const signIn = async () => {
-    await gitHubSignIn();
-  };
-
-  const signOut = async () => {
-    await firebaseSignOut();
-  };
-
   return (
     <div>
       <header className='bg-purple-500 text-white p-8 shadow-md'>
         <div className='container mx-auto flex justify-between items-center'>
           <h1 className='text-3xl font-bold'>Bookish Buzz</h1>
+          <div className='flex items-center space-x-2'>
           <input
             type='text'
             placeholder='Search'
@@ -80,9 +71,10 @@ export default function Page() {
               }
               fetchBooks();
             }}
-            className='bg-blue-500 text-white p-2 rounded-lg'>
+            className='border-2 border-gray-200 text-white p-2 rounded-lg'>
             Search
           </button>
+          </div>
 
           <ul className='flex space-x-4'>
             <li>
@@ -110,23 +102,30 @@ export default function Page() {
             {books.map((book) => (
               <li
                 key={book.id}
-                className='border-b border-gray-200 py-4 mb-4'>
-                <h2 className='text-xl font-semibold'>
-                  {book.volumeInfo.title}
-                </h2>
-                <p>{book.volumeInfo.authors?.join(', ')}</p>
-                <p>{book.volumeInfo.publishedDate}</p>
-                <p>{book.volumeInfo.description}</p>
+                className='border-b border-gray-200 py-4 mb-4 flex items-start'>
+                
+                <div className='w-1/3'>
                 <img
                   src={book.volumeInfo.imageLinks?.thumbnail}
                   alt={book.volumeInfo.title}
                   className='mt-2'
-                />
+                /></div>
+                <div className='w-2/3 ml-6'>
+                <h2 className='text-xl font-semibold'>
+                  {book.volumeInfo.title}
+                </h2>
+                <p className='mb-2'>Written by: {book.volumeInfo.authors?.join(', ')}</p>
+                <p>Published on: {book.volumeInfo.publishedDate}</p>
+                <p>{book.volumeInfo.description}</p></div>
+                
               </li>
             ))}
           </ul>
         </div>
       </main>
+
+      <footer className='bg-purple-500 text-white p-12 shadow-md'></footer>
+
     </div>
   );
 }

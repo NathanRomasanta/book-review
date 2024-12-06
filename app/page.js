@@ -37,13 +37,6 @@ export default function Page() {
                 Browse
               </Link>
             </li>
-            <li>
-              <button
-                className='mb-4 hover:underline'
-                onClick={signIn}>
-                Sign In
-              </button>
-            </li>
           </ul>
         </div>
       </header>
@@ -60,12 +53,12 @@ export default function Page() {
             <p className='text-center p-8'>Welcome to Bookish Buzz!</p>
           </div>
         ) : (
-          <div>
+          <div className='flex flex-col items-center justify-center min-h-screen'>
             <h1 className='font-cursive text-3xl text-center p-4'>
               Sorry, you need to sign in first!
             </h1>
             <button
-              className='hover:underline'
+              className='text-center hover:underline mt-4'
               onClick={signIn}>
               Sign In
             </button>
