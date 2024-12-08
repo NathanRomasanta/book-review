@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect } from "react";
 import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
   GithubAuthProvider,
-} from 'firebase/auth';
-import { auth } from './firebase';
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { auth } from "./firebase";
 
 const AuthContext = createContext();
 
@@ -16,6 +17,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const gitHubSignIn = () => {
     const provider = new GithubAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
 
@@ -31,7 +37,9 @@ export const AuthContextProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
+    <AuthContext.Provider
+      value={{ user, gitHubSignIn, googleSignIn, firebaseSignOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
